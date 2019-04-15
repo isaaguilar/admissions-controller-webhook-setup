@@ -1,0 +1,15 @@
+Now create a ValidatingWebhookConfiguration with the following clientConfig spec:
+
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+{...OMITTED}
+webhooks:
+  - clientConfig:
+      service:
+        name: admissions-webhook
+        namespace: admissions
+        path:  "/api/v1/validate/pod/readiness"
+      caBundle: "{REDACTED}"
+    {...OMITTED}
+---

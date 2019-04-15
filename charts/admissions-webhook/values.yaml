@@ -1,0 +1,36 @@
+# Default values for admissions-webhook.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: isaaguilar/admissions-webhook
+  tag: 0.1.0
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+server:
+  httpPort: 5000
+  httpsPort: 5001
+
+service:
+  type: ClusterIP
+  httpPort: 80
+  httpsPort: 443
+
+resources:
+  limits:
+    cpu: 50m
+    memory: 128M
+  requests:
+    cpu: 25m
+    memory: 64M
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
