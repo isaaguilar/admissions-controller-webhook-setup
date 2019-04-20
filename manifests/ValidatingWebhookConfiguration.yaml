@@ -52,3 +52,41 @@ webhooks:
         namespace: admissions
         path:  "/api/v1/validate/namespace/labels"
       caBundle: "${CA}"
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: template-pod-readiness
+webhooks:
+  - name: template-pod-readiness.isaaguilar.local
+    namespaceSelector: 
+      matchExpressions:
+        - key: environment
+          operator: In
+          values: 
+            - prod
+            - staging
+    rules:
+      - apiGroups:
+          - "*"
+        apiVersions:
+          - "*"
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - deployments
+          - daemonsets
+          - jobs
+          - podtemplates
+          - replicasets
+          - replicationcontrollers
+          - statefulsets
+    failurePolicy: Fail
+    clientConfig:
+      service:
+        name: admissions-webhook
+        namespace: admissions
+        path:  "/api/v1/validate/podtemplate/pod-readiness"
+      caBundle: "${CA}"
+
