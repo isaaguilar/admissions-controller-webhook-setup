@@ -1,5 +1,5 @@
 apiVersion: v1
-appVersion: 0.1.0
+appVersion: 0.1.0-test.6
 description: An admissions-controller webhook flask server
 name: admissions-webhook
 version: 0.1.0
